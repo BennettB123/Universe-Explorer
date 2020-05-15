@@ -1,0 +1,5 @@
+TODO:
+* add gravity to planets that impact player movement
+* add collision between planets and player
+* add some kind of procedurally generated cosmetic detail to planets
+* a smaller view mode where you can 'enter' a planet and explore individual planets in depth
