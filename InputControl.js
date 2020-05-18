@@ -67,7 +67,8 @@ function checkKeys(){
 }
 
 // capture touch inputs for mobile devices
-window.addEventListener("touchstart",
-    function(event){
+window.addEventListener("touchmove",
+    function (event){
         event.preventDefault();
-});
+        event.stopImmediatePropagation();
+}, { passive: false });
