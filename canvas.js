@@ -1,56 +1,14 @@
 var canvas = document.querySelector('canvas');
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 var ctx = canvas.getContext('2d');
-
-
-// capture keyboard requests for player movements
-var keys = [];
-window.addEventListener('keydown',
-    function(event){
-        if (event.key == "ArrowLeft"){
-            keys[event.key] = true;
-        }
-        if (event.key == "ArrowRight"){
-            keys[event.key] = true;
-        }
-        if (event.key == " "){
-            keys[event.key] = true;
-        }
-    });
-    window.addEventListener('keyup',
-    function(event){
-        if (event.key == "ArrowLeft"){
-            keys[event.key] = false;
-        }
-        if (event.key == "ArrowRight"){
-            keys[event.key] = false;
-        }
-        if (event.key == " "){
-            keys[event.key] = false;
-        }
-    });
-    // capture mouse scroll for zooming
-    window.addEventListener('wheel',
-    function(event){
-        if(event.deltaY != 0){
-            screen.changeZoom(event.deltaY);
-        }
-    })
-
-window.addEventListener('resize',
-    function(){
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-
 
 ////////// GLOBAL CONSTANTS \\\\\\\\\\
 
 var MaxX = canvas.width;
 var MaxY = canvas.height;
+var keys = [];
+var mobileDevice = detectMobile();
 
 ////////// HELPER FUNCTIONS \\\\\\\\\\
 
@@ -102,19 +60,7 @@ function degreesToRadians(deg){
     return deg * Math.PI / 180;
 }
 
-//////////////////////////////////////
-
-function checkKeys(){
-    if (keys["ArrowLeft"]){
-        player.rotateLeft();
-    }
-    if (keys["ArrowRight"]){
-        player.rotateRight();
-    }
-    if (keys[" "]){
-        player.thrust();
-    }
-}
+////////////////// GAME CODE START \\\\\\\\\\\\\\\\\\\
 
 var player = new Player(0, 0, "./src/rocket-ship.png");
 var screen;
@@ -140,6 +86,7 @@ function animate() {
 
     // draw screen;
     drawFrame();
+
 }
 
 // start of execution
