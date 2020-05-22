@@ -8,7 +8,6 @@ var ctx = canvas.getContext('2d');
 var MaxX = canvas.width;
 var MaxY = canvas.height;
 var keys = [];
-var mobileDevice = detectMobile();
 
 ////////// HELPER FUNCTIONS \\\\\\\\\\
 
@@ -79,7 +78,12 @@ function animate() {
     requestAnimationFrame(animate);
     
     // check for keyboard input
-    checkKeys();
+    if (!mobileDevice){
+        checkKeys();
+    }
+    else {
+        checkTouches();
+    }
 
     // update entities
     player.update();
