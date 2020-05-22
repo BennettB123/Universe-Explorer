@@ -88,12 +88,16 @@ else{
     function (event){
         event.preventDefault();
         event.stopImmediatePropagation();
-        // check the touches array for the ended touch and remove it
-        for (var i = 0; i < touches.length; i++){
-            if (touches[i].identifier == event.changedTouches[0].identifier){
-                touches.splice(i, 1);
+
+        // check each touch that ended and remove them from the touches array
+        for (var i = 0; i < event.changedTouches.length; i++){
+            for (var j = touches.length - 1; j >= 0; j--){
+                if (touches[j].identifier == event.changedTouches[i].identifier){
+                    touches.splice(j, 1);
+                }
             }
         }
+        
     }, { passive: false });
 
     window.addEventListener("touchmove",
