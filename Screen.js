@@ -11,12 +11,8 @@ class Screen {
 
     // adjust the zoomFactor of the screen, making sure to keep it a whole number between min/maxZoomFactor
     changeZoom(amount){
-        if(amount > 0){
-            this.zoomFactor /= 1.1;
-        }
-        else {
-            this.zoomFactor *= 1.1;
-        }
+
+        this.zoomFactor += amount;
         this.zoomFactor = clampNumber(this.zoomFactor, this.minZoomFactor, this.maxZoomFactor);
     }
 
@@ -36,6 +32,7 @@ class Screen {
         var playerY = Math.floor(this.player.position.y);
 
         // go through every "planet tile" that should be visible on the screen
+        // (the -2 and +2 is so that planets smoothly appear on screen instead of popping up when they come into frame)
         for (var tileX = -2; tileX < planetTilesX + 2; tileX++){
             for (var tileY = -2; tileY < planetTilesY + 2; tileY++){
                 // find coordinates of current planet tile based on player coordinates
