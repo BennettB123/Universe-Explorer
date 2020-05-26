@@ -64,33 +64,41 @@ class Player {
     // Search for planets within certain radius around the player and calculate the
     //   net gravity that these planets have.
     calculateGravity(){
-        // TODO:
-        // var range = 3;
-        // for(tileX = -range; tileX > range; tileX++){
-        //     for(tileY = -range; tileY > range; tileY++){
-        //         var currTileX = Math.floor(player.position.x) + (tileX - Math.floor(planetTilesX / 2));
-        //         var currTileY = Math.floor(player.position.y) + (tileY - Math.floor(planetTilesY / 2));
+        this.gravity = new Vector(0, 0);
+        var range = 1;
+        for(var tileX = -range; tileX <= range; tileX++){
+            for(var tileY = -range; tileY <= range; tileY++){
+                var currTileX = Math.floor(this.position.x) + tileX;
+                var currTileY = Math.floor(this.position.y) + tileY;
 
-        //         // check if planet exists at this planet tile. If so, add it to the gravity vector.
-        //         var planet = new Planet(currTileX, currTileY, this.zoomFactor / 2);
+                // check if planet exists at this planet tile. If so, add it to the gravity vector.
+                var planet = new Planet(currTileX, currTileY, screen.zoomFactor / 2);
+                if (planet.planetExists){
+                    var distFromPlanet = Math.hypot(currTileX - this.position.x, currTileY - this.position.y);
+                    var gravityStrength = ((range*3 - distFromPlanet) * planet.gravity) * 0.00001;
+                    var tempGravVec = new Vector();
+                    tempGravVec.setMagnitude(gravityStrength);
+                    tempGravVec.setDirection(Math.atan2(currTileY - this.position.y, currTileX - this.position.x));
 
-        //     }
-        // }
+                    this.gravity.addTo(tempGravVec);
+                }
+            }
+        }
     }
 
     update(){
         this.velocity.addTo(this.acceleration);
         this.velocity.limit(-this.maxSpeed, this.maxSpeed);
+        
+        // apply gravity
+        this.calculateGravity();
+        this.acceleration.addTo(this.gravity);
 
         // apply resistance
         this.acceleration.multiplyBy(this.resistance);
         this.velocity.multiplyBy(this.resistance);
 
         this.position.addTo(this.velocity);
-
-        // apply gravity
-        this.calculateGravity();
-        this.position.addTo(this.gravity);
     }
     
 }

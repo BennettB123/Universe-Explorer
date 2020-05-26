@@ -1,4 +1,5 @@
 TODO:
+* Lock the framerate, that way the game speed is the same for different devices
 * Sometimes the game loads before the player sprite is loaded, resulting in an error and a blank screen.
 * add mobile controls (buttons for left/right rotate and thrust. maybe a slider for zoomFactor)
 * add gravity to planets that impact player movement

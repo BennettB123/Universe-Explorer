@@ -11,6 +11,7 @@ class Planet {
         }
         this.radius = this.setRadius();
         this.color = this.setColor();
+        this.gravity = this.calculateGravity();
     }
 
     // returns true or false to determine if the planet exists based on its seed
@@ -27,6 +28,10 @@ class Planet {
     setColor(){
         var colorIndex = Math.floor(this.rng() * Planet.planetColors.length);
         return Planet.planetColors[colorIndex];
+    }
+
+    calculateGravity(){
+        return this.radius * 1;
     }
 
     // draw the planet, where x, y are the location to draw them on the canvas screen

@@ -24,8 +24,8 @@ class Screen {
         // draw planets
         // planetTilesX/Y is the total number of "planet tiles" that fit across the screen.
         //   (increases when zoomFactor decreases)
-        var planetTilesX = canvas.width / this.zoomFactor;
-        var planetTilesY = canvas.height / this.zoomFactor;
+        this.planetTilesX = canvas.width / this.zoomFactor;
+        this.planetTilesY = canvas.height / this.zoomFactor;
 
         // playerX/Y is the x and y coordinate of the player rounded down to nearest integer
         var playerX = Math.floor(this.player.position.x);
@@ -33,11 +33,11 @@ class Screen {
 
         // go through every "planet tile" that should be visible on the screen
         // (the -2 and +2 is so that planets smoothly appear on screen instead of popping up when they come into frame)
-        for (var tileX = -2; tileX < planetTilesX + 2; tileX++){
-            for (var tileY = -2; tileY < planetTilesY + 2; tileY++){
+        for (var tileX = -2; tileX < this.planetTilesX + 2; tileX++){
+            for (var tileY = -2; tileY < this.planetTilesY + 2; tileY++){
                 // find coordinates of current planet tile based on player coordinates
-                var currTileX = playerX + (tileX - Math.floor(planetTilesX / 2));
-                var currTileY = playerY + (tileY - Math.floor(planetTilesY / 2));
+                var currTileX = playerX + (tileX - Math.floor(this.planetTilesX / 2));
+                var currTileY = playerY + (tileY - Math.floor(this.planetTilesY / 2));
 
                 // check if planet exists at this planet tile. If so, draw it.
                 var planet = new Planet(currTileX, currTileY, this.zoomFactor / 2);
@@ -46,8 +46,8 @@ class Screen {
                     //    draw it based on where the player is on the screen: the exact middle
                     var middleWidth = canvas.width / 2;
                     var middleHeight = canvas.height / 2;
-                    var drawingLocX = middleWidth + (tileX - Math.floor(planetTilesX / 2)) * this.zoomFactor;
-                    var drawingLocY = middleHeight + (tileY - Math.floor(planetTilesY / 2)) * this.zoomFactor;
+                    var drawingLocX = middleWidth + (tileX - Math.floor(this.planetTilesX / 2)) * this.zoomFactor;
+                    var drawingLocY = middleHeight + (tileY - Math.floor(this.planetTilesY / 2)) * this.zoomFactor;
 
                     
                     // offset for when player is not exactly on a coordinate line

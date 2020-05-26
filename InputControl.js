@@ -97,7 +97,7 @@ else {
     };
 
     // handle touches for player movement
-    hammer.get('press').set({time: 0});
+    hammer.get('press').set({time: 1});
     hammer.on('press', pressed); 
     function pressed(event){
         var thirdOfWidth = canvas.width / 3;

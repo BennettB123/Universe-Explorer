@@ -82,7 +82,7 @@ function animate() {
         checkKeys();
     }
     else {
-        checkTouches();
+        //checkTouches();
     }
 
     // update entities
