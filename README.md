@@ -1,5 +1,5 @@
 # Universe-Explorer
-Explorer a procedurally generated universe
+Explore a procedurally generated universe
 
 # Controls
 * Left and right arrow keys will rotate the ship
